@@ -24,7 +24,7 @@ data:
   ##
   # create non-sensative data attributes
   ##
-  database: wordpress
+  database: "wordpress"
   user: "wordpress"
 ---
 apiVersion: apps/v1
@@ -90,7 +90,11 @@ spec:
       # define volume mounts here, be sure to reference
       # the PVC in your container spec
       ##
-      volumeMounts:
+        volumeMounts:
+              - mountPath: /var/lib/mysql
+                name: mysql-persistent-storage
+      # Volumes at pod spec level
+      volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pv-claim
